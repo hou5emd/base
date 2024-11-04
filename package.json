@@ -6,34 +6,31 @@
     "build": "rsbuild build",
     "dev": "rsbuild dev --open",
     "format": "prettier --write .",
-    "lint": "eslint",
+    "lint": "eslint ./src",
     "preview": "rsbuild preview"
   },
   "dependencies": {
-    "antd": "^5.21.2",
-    "eslint-plugin-import-x": "^4.4.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@eslint/compat": "^1.1.1",
+    "@eslint/compat": "^1.2.0",
+    "@eslint/eslintrc": "^3.1.0",
     "@eslint/js": "^9.14.0",
-    "@rsbuild/core": "^1.0.1",
-    "@rsbuild/plugin-eslint": "^1.0.4",
-    "@rsbuild/plugin-react": "^1.0.1",
-    "@rsbuild/plugin-type-check": "^1.0.1",
-    "@types/eslint__js": "^8.42.3",
-    "@types/react": "^18.3.5",
-    "@types/react-dom": "^18.3.0",
+    "@rsbuild/core": "^1.0.18",
+    "@rsbuild/plugin-react": "^1.0.5",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "confusing-browser-globals": "^1.0.11",
     "eslint": "^9.14.0",
+    "eslint-import-resolver-typescript": "^3.6.3",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-no-relative-import-paths": "^1.5.5",
-    "eslint-plugin-react": "^7.35.2",
-    "eslint-plugin-react-hooks": "^5.1.0-rc.0",
-    "globals": "^15.9.0",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "globals": "^15.12.0",
     "prettier": "^3.3.3",
     "typescript": "^5.6.3",
-    "typescript-eslint": "^8.12.2",
-    "typescript-plugin-css-modules": "^5.1.0"
+    "typescript-eslint": "^8.12.2"
   }
 }

@@ -1,45 +1,41 @@
-import { fixupConfigRules } from '@eslint/compat';
-import js from '@eslint/js';
-import tsPlugin from '@typescript-eslint/eslint-plugin';
-import tsParser from '@typescript-eslint/parser';
+import pluginJs from '@eslint/js';
 import importPlugin from 'eslint-plugin-import';
 import importPath from 'eslint-plugin-no-relative-import-paths';
-import reactJsx from 'eslint-plugin-react/configs/jsx-runtime.js';
-import react from 'eslint-plugin-react/configs/recommended.js';
-import reactHooks from 'eslint-plugin-react-hooks';
+import pluginReact from 'eslint-plugin-react';
 import globals from 'globals';
+import tseslint from 'typescript-eslint';
 
-const config = [
-  js.configs.recommended,
-  ...fixupConfigRules([
-    {
-      ...react,
-      settings: {
-        react: { version: 'detect' },
-      },
-    },
-    reactJsx,
-  ]),
+import airBnbBase from './__assets__/eslint-airbnb/index.mjs';
+
+/** @type {import('eslint').Linter.Config[]} */
+export default [
+  { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'] },
+  { languageOptions: { globals: globals.browser } },
+  pluginJs.configs.recommended,
+  ...tseslint.configs.strictTypeChecked,
+  ...tseslint.configs.stylisticTypeChecked,
+  pluginReact.configs.flat.recommended,
   {
     languageOptions: {
-      globals: { ...globals.browser, ...globals.node },
-      parser: tsParser,
       parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
-        project: ['./tsconfig.json'],
+        projectService: true,
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         tsconfigRootDir: import.meta.dirname,
       },
     },
-    files: ['**/*.ts', '**/*.tsx'],
     plugins: {
-      'react-hooks': reactHooks,
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       import: importPlugin,
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       'no-relative-import-paths': importPath,
-      '@typescript-eslint': tsPlugin,
+    },
+    settings: {
+      'import/resolver': {
+        typescript: {}, // this loads <rootdir>/tsconfig.json to eslint
+      },
     },
     rules: {
+      ...airBnbBase,
       '@typescript-eslint/ban-ts-comment': 'off',
       '@typescript-eslint/no-base-to-string': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
@@ -110,9 +106,7 @@ const config = [
       'react/prop-types': 'off',
       'react/require-default-props': 'off',
       'react-hooks/exhaustive-deps': 'off',
+      'react/react-in-jsx-scope': 'off',
     },
   },
-  { ignores: ['dist/'] },
 ];
-
-export default config;
