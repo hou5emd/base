@@ -18,7 +18,9 @@
     "@eslint/eslintrc": "^3.1.0",
     "@eslint/js": "^9.14.0",
     "@rsbuild/core": "^1.0.18",
+    "@rsbuild/plugin-eslint": "^1.0.4",
     "@rsbuild/plugin-react": "^1.0.5",
+    "@rsbuild/plugin-type-check": "^1.0.1",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "confusing-browser-globals": "^1.0.11",
@@ -31,6 +33,7 @@
     "globals": "^15.12.0",
     "prettier": "^3.3.3",
     "typescript": "^5.6.3",
-    "typescript-eslint": "^8.12.2"
+    "typescript-eslint": "^8.12.2",
+    "typescript-plugin-css-modules": "^5.1.0"
   }
 }
