@@ -1,10 +1,5 @@
-import './App.css';
+import { RouterProvider } from 'react-router-dom';
 
-const App = () => (
-    <div className="content">
-      <h1>Rsbuild with React</h1>
-      <p>Start building amazing things with Rsbuild.</p>
-    </div>
-);
+import { appRouter } from 'app.router';
 
-export default App;
+export const App = () => <RouterProvider router={appRouter} />;

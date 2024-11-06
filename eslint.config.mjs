@@ -1,9 +1,13 @@
 import pluginJs from '@eslint/js';
+import tsPlugin from '@typescript-eslint/eslint-plugin';
+import tsParser from '@typescript-eslint/parser';
+import destructuringPlugin from 'eslint-plugin-destructuring';
 import importPlugin from 'eslint-plugin-import';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
 import importPath from 'eslint-plugin-no-relative-import-paths';
+import prettierRecommended from 'eslint-plugin-prettier/recommended';
 import pluginReact from 'eslint-plugin-react';
 import globals from 'globals';
-import tseslint from 'typescript-eslint';
 
 import airBnbBase from './__assets__/eslint-airbnb/index.mjs';
 
@@ -12,21 +16,23 @@ export default [
   { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'] },
   { languageOptions: { globals: { ...globals.node, ...globals.browser } } },
   pluginJs.configs.recommended,
-  ...tseslint.configs.strictTypeChecked,
-  ...tseslint.configs.stylisticTypeChecked,
   pluginReact.configs.flat.recommended,
+  pluginReact.configs.flat['jsx-runtime'],
+  prettierRecommended,
   {
     languageOptions: {
+      parser: tsParser,
       parserOptions: {
-        projectService: true,
+        project: './tsconfig.json',
         tsconfigRootDir: import.meta.dirname,
       },
     },
     plugins: {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      '@typescript-eslint': tsPlugin,
       import: importPlugin,
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       'no-relative-import-paths': importPath,
+      'jsx-a11y': jsxA11y,
+      destructuring: destructuringPlugin,
     },
     settings: {
       'import/resolver': {
@@ -42,10 +48,7 @@ export default [
       '@typescript-eslint/no-misused-promises': 'off',
       '@typescript-eslint/no-non-null-assertion': 'error',
       '@typescript-eslint/no-redundant-type-constituents': 'off',
-      '@typescript-eslint/no-restricted-imports': [
-        'error',
-        { paths: ['preact'], patterns: ['preact/*'] },
-      ],
+      '@typescript-eslint/no-restricted-imports': ['error', { paths: ['preact'], patterns: ['preact/*'] }],
       '@typescript-eslint/no-shadow': 'off',
       '@typescript-eslint/no-unsafe-enum-comparison': 'off',
       '@typescript-eslint/no-unused-vars': 'warn',
@@ -53,6 +56,8 @@ export default [
       '@typescript-eslint/restrict-template-expressions': 'off',
       '@typescript-eslint/switch-exhaustiveness-check': 'error',
       'class-methods-use-this': 'off',
+      'destructuring/in-methods-params': 'error',
+      'destructuring/in-params': ['error', { 'max-params': 0 }],
       'eol-last': ['error', 'always'],
       'eslint-comments/no-unlimited-disable': 'off',
       'func-names': 'off',
@@ -65,16 +70,7 @@ export default [
       'import/order': [
         'error',
         {
-          groups: [
-            'builtin',
-            'external',
-            'internal',
-            'parent',
-            'sibling',
-            'index',
-            'object',
-            'type',
-          ],
+          groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object', 'type'],
           'newlines-between': 'always',
           alphabetize: {
             caseInsensitive: true,
@@ -87,19 +83,15 @@ export default [
       'max-classes-per-file': 'off',
       'no-console': ['warn', { allow: ['warn', 'error'] }],
       'no-continue': ['off'],
-      'no-relative-import-paths/no-relative-import-paths': [
-        'error',
-        { allowSameFolder: true, rootDir: 'src' },
-      ],
+      'no-relative-import-paths/no-relative-import-paths': ['error', { allowSameFolder: true, rootDir: 'src' }],
       'no-shadow': 'off',
       'no-use-before-define': 'off',
+      'react/display-name': 'off',
       'react/function-component-definition': 'off',
-      'react/jsx-filename-extension': [
-        'error',
-        { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
-      ],
+      'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
       'react/jsx-props-no-spreading': 'off',
       'react/jsx-no-useless-fragment': ['off'],
+      'react/jsx-wrap-multilines': ['error', { return: 'parens-new-line' }],
       'react/no-array-index-key': 'off',
       'react/no-unstable-nested-components': 'off',
       'react/prop-types': 'off',
