@@ -10,8 +10,10 @@ export default defineConfig({
       exportLocalsConvention: 'camelCaseOnly',
     },
   },
-  server: {
-    port: 3001,
+  source: {
+    decorators: {
+      version: 'legacy',
+    },
   },
   plugins: [
     pluginReact(),

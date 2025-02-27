@@ -1,13 +1,13 @@
 import pluginJs from '@eslint/js';
 import stylisticJs from '@stylistic/eslint-plugin';
-import deprecatedTsPlugin from '@typescript-eslint/eslint-plugin';
+import typeScriptPlugin from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import destructuringPlugin from 'eslint-plugin-destructuring';
 import importPlugin from 'eslint-plugin-import';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import importPath from 'eslint-plugin-no-relative-import-paths';
 import prettier from 'eslint-plugin-prettier';
-import deprecatedPluginReact from 'eslint-plugin-react';
+import reactPlugin from 'eslint-plugin-react';
 import globals from 'globals';
 
 /** @type {import('eslint').Linter.Config[]} */
@@ -28,9 +28,9 @@ export default [
       'no-relative-import-paths': importPath,
       'jsx-a11y': jsxA11y,
       destructuring: destructuringPlugin,
-      deprecatedReact: deprecatedPluginReact,
+      reactPlugin,
       '@stylistic': stylisticJs,
-      deprecatedTs: deprecatedTsPlugin,
+      typeScriptPlugin,
       prettier,
     },
     settings: {
@@ -39,20 +39,22 @@ export default [
       },
     },
     rules: {
-      '@stylistic/ban-ts-comment': 'off',
-      '@stylistic/no-base-to-string': 'off',
-      '@stylistic/no-explicit-any': 'off',
-      '@stylistic/no-floating-promises': 'off',
-      '@stylistic/no-misused-promises': 'off',
-      'deprecatedTs/no-non-null-assertion': 'error',
-      '@stylistic/no-redundant-type-constituents': 'off',
-      'deprecatedTs/no-restricted-imports': ['error', { paths: ['preact'], patterns: ['preact/*'] }],
-      '@stylistic/no-shadow': 'off',
-      '@stylistic/no-unsafe-enum-comparison': 'off',
-      'deprecatedTs/no-unused-vars': 'warn',
-      'deprecatedTs/no-use-before-define': 'warn',
-      '@stylistic/restrict-template-expressions': 'off',
-      'deprecatedTs/switch-exhaustiveness-check': 'error',
+      'typeScriptPlugin/ban-ts-comment': 'off',
+      'typeScriptPlugin/no-base-to-string': 'off',
+      'typeScriptPlugin/no-explicit-any': 'off',
+      'typeScriptPlugin/no-floating-promises': 'off',
+      'typeScriptPlugin/no-misused-promises': 'off',
+      'typeScriptPlugin/no-non-null-assertion': 'error',
+      'typeScriptPlugin/no-redundant-type-constituents': 'off',
+      'typeScriptPlugin/no-restricted-imports': [
+        'error',
+        { paths: ['preact'], patterns: ['preact/*'] },
+      ],
+      'typeScriptPlugin/no-unsafe-enum-comparison': 'off',
+      'typeScriptPlugin/no-unused-vars': 'warn',
+      'typeScriptPlugin/no-use-before-define': 'warn',
+      'typeScriptPlugin/restrict-template-expressions': 'off',
+      'typeScriptPlugin/switch-exhaustiveness-check': 'error',
       'class-methods-use-this': 'off',
       'destructuring/in-methods-params': 'error',
       'destructuring/in-params': ['error', { 'max-params': 0 }],
@@ -68,7 +70,16 @@ export default [
       'import/order': [
         'error',
         {
-          groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object', 'type'],
+          groups: [
+            'builtin',
+            'external',
+            'internal',
+            'parent',
+            'sibling',
+            'index',
+            'object',
+            'type',
+          ],
           'newlines-between': 'always',
           alphabetize: {
             caseInsensitive: true,
@@ -81,21 +92,28 @@ export default [
       'max-classes-per-file': 'off',
       'no-console': ['warn', { allow: ['warn', 'error'] }],
       'no-continue': ['off'],
-      'no-relative-import-paths/no-relative-import-paths': ['error', { allowSameFolder: true, rootDir: 'src' }],
+      'no-relative-import-paths/no-relative-import-paths': [
+        'error',
+        { allowSameFolder: true, rootDir: 'src' },
+      ],
       'no-shadow': 'off',
       'no-use-before-define': 'off',
-      '@stylistic/display-name': 'off',
-      '@stylistic/function-component-definition': 'off',
-      'deprecatedReact/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
-      '@stylistic/jsx-props-no-spreading': 'off',
-      '@stylistic/jsx-no-useless-fragment': ['off'],
+      'no-unused-vars': 'off',
+      'reactPlugin/display-name': 'off',
+      'reactPlugin/function-component-definition': 'off',
+      'reactPlugin/jsx-filename-extension': [
+        'error',
+        { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
+      ],
+      'reactPlugin/jsx-props-no-spreading': 'off',
+      'reactPlugin/jsx-no-useless-fragment': ['off'],
       '@stylistic/jsx-wrap-multilines': ['error', { return: 'parens-new-line' }],
-      '@stylistic/no-array-index-key': 'off',
-      '@stylistic/no-unstable-nested-components': 'off',
-      '@stylistic/prop-types': 'off',
-      '@stylistic/require-default-props': 'off',
+      'reactPlugin/no-array-index-key': 'off',
+      'reactPlugin/no-unstable-nested-components': 'off',
+      'reactPlugin/prop-types': 'off',
+      'reactPlugin/require-default-props': 'off',
       'react-hooks/exhaustive-deps': 'off',
-      '@stylistic/react-in-jsx-scope': 'off',
+      'reactPlugin/react-in-jsx-scope': 'off',
       'prettier/prettier': [
         'error',
         {
